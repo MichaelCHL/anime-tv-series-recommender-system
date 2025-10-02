@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ANIME-TV-SERIES-RECOMMENDER-SYSTEM"
+version = "0.1"
+authors = [
+    {name = "Michael"}
+]
+description = "A recommender system for anime and tv series"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "fastapi",
+    
+]
