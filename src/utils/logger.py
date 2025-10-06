@@ -12,6 +12,6 @@ logging.basicConfig(
     format=format 
 )
 
-def logger(name):
+def get_logger(name):
     return logging.getLogger(name)
 
