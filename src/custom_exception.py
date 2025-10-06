@@ -12,3 +12,6 @@ class DataLoadingException(PipelineException):
 
 class DataCleaningException(PipelineException):
     pass
+
+class FeaturePreparationException(PipelineException):
+    pass
