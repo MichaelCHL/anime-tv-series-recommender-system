@@ -1,3 +1,4 @@
 venv/
 logs/
-ANIME_TV_SERIES_RECOMMENDER_SYSTEM.egg-info/
+src/ANIME_TV_SERIES_RECOMMENDER_SYSTEM.egg-info/
+__pycache__/
