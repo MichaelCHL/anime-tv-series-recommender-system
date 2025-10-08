@@ -2,10 +2,11 @@ import re
 import os
 import pandas as pd
 import numpy as np
-from utils.logger import logger
+from utils.logger import get_logger
 from utils.text_processing import *
 from custom_exception import *
 
+logger = get_logger(__name__)
 
 class DataPreprocess:
     def __init__(self, path):
@@ -58,6 +59,6 @@ class DataPreprocess:
 
 
 if __name__ == "__main__":
-    data_preprocessor = DataPreprocess('../artifacts/raw/')
+    data_preprocessor = DataPreprocess('artifacts/raw/anime-dataset-2023.csv')
     data_preprocessor.run()
 
