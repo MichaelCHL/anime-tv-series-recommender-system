@@ -1,4 +1,3 @@
-import re
 import os
 import pandas as pd
 import numpy as np
@@ -11,8 +10,8 @@ logger = get_logger(__name__)
 class DataPreprocess:
     def __init__(self, path):
         self.path = path
-        os.makedirs('../artifacts/processed/', exist_ok=True)
-        self.output_path = '../artifacts/processed/output.csv'
+        os.makedirs('artifacts/processed', exist_ok=True)
+        self.output_path = 'artifacts/processed/output.csv'
         self.df = None
 
     def load_data(self):
@@ -45,18 +44,19 @@ class DataPreprocess:
             if year_col:
                 self.df['year'] = self.df[year_col].apply(find_year)
             # create text corpus column
-            self.df['text_corpus'] = self.df['English_name_cleaned'] + self.df['Genres'] + self.df['Synopsis_cleaned']
+            self.df['text_corpus'] = self.df['English_name_cleaned'] + self.df['Genres_cleaned'] + self.df['Synopsis_cleaned']
             self.df.to_csv(self.output_path)
-            logger.info("Feature prepared successfully!")
+            logger.info(f"Feature prepared successfully! Data is saved to {self.output_path}")
 
         except Exception as e:
+            logger.error("Failed to complete feature preparation")
             raise FeaturePreparationException("Failed to complete feature preparation", e)
             
     def run(self):
         self.load_data()
-        self.data_cleaning(['English_name', 'Synopsis'])
+        self.data_cleaning(['English_name', 'Genres', 'Synopsis'])
         self.feature_preparation('Aired')
-
+        logger.info("Data preproccessing has successfully completed!")
 
 if __name__ == "__main__":
     data_preprocessor = DataPreprocess('artifacts/raw/anime-dataset-2023.csv')

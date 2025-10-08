@@ -10,7 +10,7 @@ from nltk.corpus import stopwords
 # if os.path.exists(punkt_tab_path):
 #     shutil.rmtree(punkt_tab_path)
 
-nltk.download('punkt')#, download_dir=nltk_data_path)
+nltk.download('punkt_tab')#, download_dir=nltk_data_path)
 nltk.download('stopwords')#, download_dir=nltk_data_path)
 
 def text_cleaning(col):
