@@ -15,3 +15,6 @@ class DataCleaningException(PipelineException):
 
 class FeaturePreparationException(PipelineException):
     pass
+
+class VectorizationException(PipelineException):
+    pass
