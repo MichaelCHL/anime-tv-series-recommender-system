@@ -4,14 +4,14 @@ import numpy as np
 from utils.logger import get_logger
 from utils.text_processing import *
 from custom_exception import *
+from config.path import PROCESSED_DATA_DIR
 
 logger = get_logger(__name__)
 
 class DataPreprocess:
     def __init__(self, path):
         self.path = path
-        os.makedirs('artifacts/processed', exist_ok=True)
-        self.output_path = 'artifacts/processed/output.csv'
+        self.output_path = PROCESSED_DATA_DIR / "output.csv"
         self.df = None
 
     def load_data(self):
