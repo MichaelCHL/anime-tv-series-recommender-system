@@ -18,3 +18,6 @@ class FeaturePreparationException(PipelineException):
 
 class VectorizationException(PipelineException):
     pass
+
+class ModelLoadingException(PipelineException):
+    pass
