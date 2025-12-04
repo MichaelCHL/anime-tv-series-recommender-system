@@ -1,10 +1,12 @@
 from utils.logger import get_logger
-from config.path import MODELS_DIR, FEATURE_DIR
-from custom_exception import ModelLoadingException
+from config.path import MODELS_DIR, FEATURE_DIR, RAW_DATA_DIR
+from custom_exception import ModelLoadingException, SimilarityCalculationException
 from sklearn.metrics.pairwise import cosine_similarity
 from scipy.sparse import load_npz
 
 import joblib
+import pandas as pd
+import numpy as np
 
 logger = get_logger(__name__)
 
@@ -13,7 +15,6 @@ class SimilarityCalculator:
         self.model_path = model_path
         self.model_name = model_name
         self.feature_path = feature_path
-        self.model = None
         self.feature_matrix=None
         
     def load_model(self):
@@ -31,7 +32,13 @@ class SimilarityCalculator:
             logger.error("Failed to load model!")
             raise ModelLoadingException("Failed to load model", e)
 
-    def recommend(self):
+    def compute(self, idx, title, k=10):
         try:
-            logger.info("Recommending similar anime and tv series...")
-            similarity_matrix = cosine_similarity(self.model, self.model)            
+            logger.info("Finding similar anime and tv series...")
+            sims = cosine_similarity(self.feature_matrix[idx], self.feature_matrix).flatten()
+            return sims
+        
+        except Exception as e:
+            logger.error("Failed to compute cosine similarity")
+            raise SimilarityCalculationException("Failed to compute cosine similarity", e)
+            

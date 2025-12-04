@@ -21,3 +21,6 @@ class VectorizationException(PipelineException):
 
 class ModelLoadingException(PipelineException):
     pass
+
+class SimilarityCalculationException(PipelineException):
+    pass
