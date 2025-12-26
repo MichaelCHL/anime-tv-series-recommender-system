@@ -23,22 +23,27 @@ class SimilarityCalculator:
                 logger.info("Loading tf-idf matrix...")
 
                 self.feature_path = FEATURE_DIR
-                matrix_path = self.feature_matrix / 'tfidf.npz'
+                matrix_path = self.feature_path / 'tfidf_matrix.npz'
                 self.feature_matrix = load_npz(matrix_path)
-
                 logger.info("tf-idf matrix loaded successfully!")
 
         except Exception as e:
             logger.error("Failed to load model!")
             raise ModelLoadingException("Failed to load model", e)
 
-    def compute(self, idx, title, k=10):
+    def compute(self, k=10):
         try:
-            logger.info("Finding similar anime and tv series...")
-            sims = cosine_similarity(self.feature_matrix[idx], self.feature_matrix).flatten()
+            logger.info("Calculating similarity...")
+            sims = cosine_similarity(self.feature_matrix, self.feature_matrix).flatten()
+            logger.info("Calculation completed!")
             return sims
+        
         
         except Exception as e:
             logger.error("Failed to compute cosine similarity")
             raise SimilarityCalculationException("Failed to compute cosine similarity", e)
-            
+
+if __name__ == '__main__':
+    sim_calculator = SimilarityCalculator('tf-idf')
+    sim_calculator.load_model()
+    sim_calculator.compute()
