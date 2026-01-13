@@ -11,7 +11,7 @@ import numpy as np
 logger = get_logger(__name__)
 
 class SimilarityCalculator:
-    def __init__(self, model_name, model_path=MODELS_DIR, feature_path=None):
+    def __init__(self, model_name, model_path=MODELS_DIR, feature_path=FEATURE_DIR):
         self.model_path = model_path
         self.model_name = model_name
         self.feature_path = feature_path
@@ -31,7 +31,7 @@ class SimilarityCalculator:
             logger.error("Failed to load model!")
             raise ModelLoadingException("Failed to load model", e)
 
-    def compute(self, k=10):
+    def compute(self):
         try:
             logger.info("Calculating similarity...")
             sims = cosine_similarity(self.feature_matrix, self.feature_matrix).flatten()

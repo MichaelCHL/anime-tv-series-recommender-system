@@ -24,3 +24,6 @@ class ModelLoadingException(PipelineException):
 
 class SimilarityCalculationException(PipelineException):
     pass
+
+class RecommendationException(PipelineException):
+    pass
